@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main">
+    <div class="container article">
+        <div class="card" style="width: 80%; height: 100%; color: white;">
+            <h2>{{detail.name}}</h2><br>
+            {%if detail.image%}
+            <img src="{{detail.image.url}}" height="300"><br><br>
+            {%endif%}
+            <p>{{detail.address}}</p>
+            <p>{{detail.description|linebreaksbr}}</p><br>
+            <div class="btns">
+                <a class="btn" href="{%url 'update' detail.id%}">수정</a>
+                <a class="btn" href="{%url 'delete' detail.id%}"> 삭제 </a>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

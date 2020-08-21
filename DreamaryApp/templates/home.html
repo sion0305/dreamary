@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main">
+    <!-- post -->
+    <div class="article">
+        <!-- 블로그 글 띄우는 부분 -->
+        {% for blog in posts %}
+        <div class="card">
+            <h2>{{blog.name}}</h2>
+            {% if blog.image %}
+            <!-- 이미지가 있을때만 출력하기 -->
+            <img width="300px" height="300px" src="{{ blog.image.url }}" alt="bookimg">
+            {% endif %}
+            <br><br>
+            <div class="btns">
+            <a class="btn" href="{%url 'update' blog.id%}">수정</a>
+            <a class="btn" href="{%url 'delete' blog.id%}"> 삭제 </a>
+            <a class="btn" href="{%url 'detail' blog.id%}">더보기</a>
+            <br><br>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <br><br>
+    <div class="container paginator">
+        {%if posts.has_previous%}
+        <a href="?page=1"><button type="button" class="btn btn-light" style="margin:0 10px 0 0;">First</button></a>
+        <a href="?page={{posts.previous_page_number}}"><button type="button" class="btn btn-light" style="margin:0 10px;">Previous</button></a>
+        {%endif%}
+    
+        <span>{{posts.number}}</span>
+        <span> of </span>
+        <span>{{posts.paginator.num_pages}}</span>
+    
+        {%if posts.has_next%}
+        <a href="?page={{posts.next_page_number}}"><button type="button" class="btn btn-light" style="margin:0 10px;">Next</button></a>
+        <a href="?page={{posts.paginator.num_pages}}"><button type="button" class="btn btn-light" style="margin:0 10px;">Last</button></a>
+        {%endif%}
+    </div>
+</div>
+
+<footer class="footer">
+    <hr>
+    <p>&copy; 2020, 동덕여대 멋쟁이 사자처럼 8기 손시온, 최시온, 이효선</p>
+</footer>
+{% endblock%}
